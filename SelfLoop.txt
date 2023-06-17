@@ -1,0 +1,38 @@
+package Assignment12;
+
+class Sort2 
+{
+    int val;
+    Sort2 next;
+    Sort2(int val) 
+    {
+        this.val = val;
+    }
+}
+public class SelfLoop {
+    public static void main(String[] args) 
+    {
+        Sort2 head = new Sort2(1);
+        head.next = new Sort2(3);
+        head.next.next = new Sort2(4);
+        head.next.next.next = head.next;
+        boolean hasLoop = detectLoop(head);
+        System.out.println(hasLoop);
+    }
+    public static boolean detectLoop(Sort2 head)
+    {
+        Sort2 slow = head;
+        Sort2 fast = head;
+        while (fast != null && fast.next != null) 
+        {
+            slow = slow.next;
+            fast = fast.next.next;
+            if (slow == fast) 
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+}
+

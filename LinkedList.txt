@@ -1,0 +1,59 @@
+package Assignment12;
+
+class Sort3 
+{
+    int val;
+    Sort3 next;
+    Sort3(int val) 
+    {
+        this.val = val;
+    }
+}
+public class LinkedList 
+{
+	public static void main(String[] args) 
+	{
+		Sort3 head = new Sort3(1);
+        head.next = new Sort3(2);
+        head.next.next = new Sort3(3);
+        head.next.next.next = new Sort3(4);
+        head.next.next.next.next = new Sort3(5);
+        head.next.next.next.next.next = new Sort3(6);
+        head.next.next.next.next.next.next = new Sort3(7);
+        head.next.next.next.next.next.next.next = new Sort3(8);
+        head.next.next.next.next.next.next.next.next = new Sort3(9);
+        int n = 2;
+        Sort3 nthNodeFromEnd = findNthNodeFromEnd(head, n);
+        if (nthNodeFromEnd != null)
+        {
+            System.out.println(nthNodeFromEnd.val);
+        } 
+        else
+        {
+            System.out.println("Invalid value of N");
+        }
+    }
+    public static Sort3 findNthNodeFromEnd(Sort3 head, int n) 
+    {
+        if (head == null || n <= 0) 
+        {
+            return null;
+        }
+        Sort3 slow = head;
+        Sort3 fast = head;
+        for (int i = 0; i < n; i++) 
+        {
+            if (fast == null) 
+            {
+                return null;
+            }
+            fast = fast.next;
+        }
+        while (fast != null)
+        {
+            slow = slow.next;
+            fast = fast.next;
+        }
+        return slow;
+    }
+}

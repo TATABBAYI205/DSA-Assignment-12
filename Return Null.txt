@@ -1,0 +1,52 @@
+package Assignment12;
+
+class Sort1 
+{
+    int val;
+    Sort1 next;
+    Sort1(int val) 
+    {
+        this.val = val;
+    }
+}
+public class ReturnNull
+{
+    public static void main(String[] args) 
+    {
+    	Sort1 head = new Sort1(1);
+        head.next = new Sort1(2);
+        head.next.next = new Sort1(3);
+        head.next.next.next = new Sort1(4);
+        head.next.next.next.next = new Sort1(5);
+        head = deleteMiddle(head);
+        printLinkedList(head);
+    }
+    public static Sort1 deleteMiddle(Sort1 head) 
+    {
+        if (head == null || head.next == null) 
+        {
+            return null;
+        }
+        Sort1 slow = head;
+        Sort1 fast = head;
+        Sort1 prev = null;
+        while (fast != null && fast.next != null)
+        {
+            fast = fast.next.next;
+            prev = slow;
+            slow = slow.next;
+        }
+        prev.next = slow.next;
+        return head;
+    }
+    public static void printLinkedList(Sort1 head) 
+    {
+    	Sort1 curr = head;
+        while (curr != null) 
+        {
+            System.out.print(curr.val + " ");
+            curr = curr.next;
+        }
+        System.out.println();
+    }
+}	

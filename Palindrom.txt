@@ -1,0 +1,64 @@
+package Assignment12;
+
+import java.util.Stack;
+
+class Sort4
+{
+    int val;
+    Sort4 next;
+    Sort4(int val) 
+    {
+        this.val = val;
+    }
+}
+public class Palindrom 
+{
+	 public static void main(String[] args) 
+	 {
+		 Sort4 head = new Sort4('R');
+	        head.next = new Sort4('A');
+	        head.next.next = new Sort4('D');
+	        head.next.next.next = new Sort4('A');
+	        head.next.next.next.next = new Sort4('R');
+	        boolean isPalindrome = isPalindrome(head);
+	        if (isPalindrome) 
+	        {
+	            System.out.println("Yes");
+	        } 
+	        else 
+	        {
+	            System.out.println("No");
+	        }
+	    }
+	    public static boolean isPalindrome(Sort4 head)
+	    {
+	        if (head == null || head.next == null) 
+	        {
+	            return true;
+	        }
+
+	        Stack<Character> stack = new Stack<>();
+	        Sort4 slow = head;
+	        Sort4 fast = head;
+	        while (fast != null && fast.next != null) 
+	        {
+	            stack.push((char) slow.val);
+	            slow = slow.next;
+	            fast = fast.next.next;
+	        }
+	        if (fast != null)
+	        {
+	            slow = slow.next;
+	        }
+	        while (slow != null)         
+	        {
+	            char c = stack.pop();
+	            if (c != slow.val) 
+	            {
+	                return false;
+	            }
+	            slow = slow.next;
+	        }
+	        return true;
+	    }
+}

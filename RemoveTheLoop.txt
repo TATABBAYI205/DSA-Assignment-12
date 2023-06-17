@@ -1,0 +1,66 @@
+package Assignment12;
+
+class Sort5 
+{
+    int val;
+    Sort5 next;
+    Sort5(int val) 
+    {
+        this.val = val;
+    }
+}
+public class RemoveTheLoop 
+{
+    public static void main(String[] args) 
+    {
+    	Sort5 head = new Sort5(1);
+    	head.next = new Sort5(8);
+        head.next.next = new Sort5(3);
+        head.next.next.next = new Sort5(4);
+        head.next.next.next.next = head.next;
+        removeLoop(head);
+        printLinkedList(head);
+    }
+    public static void removeLoop(Sort5 head) 
+    {
+        if (head == null || head.next == null) 
+        {
+            return;
+        }
+        Sort5 slow = head;
+        Sort5 fast = head;
+        while (fast != null && fast.next != null) 
+        {
+            slow = slow.next;
+            fast = fast.next.next;
+            if (slow == fast) 
+            {
+                break;
+            }
+        }
+        if (slow != fast) 
+        {
+            return;
+        }
+        slow = head;
+        while (slow.next != fast.next) 
+        {
+            slow = slow.next;
+            fast = fast.next;
+        }
+        fast.next = null;
+    }
+    public static void printLinkedList(Sort5 head) 
+    {
+        Sort5 curr = head;
+        while (curr != null) 
+        {
+            System.out.print(curr.val + " ");
+            curr = curr.next;
+        }
+        System.out.println();
+    }
+}
+
+
+
